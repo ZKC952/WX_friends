@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>数据中心</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body{
+            text-align: center;
+        }
+        .top{
+            text-align: center;
+            border: 0px solid red;
+            width: 80%;
+            height: 90px;
+            margin: 0 auto;
+            line-height: 75px;
+        }
+        a{
+            margin: 65px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <p style="font-size: 26px; font-weight: bold;">微信好友数据中心</p>
+    <div class="top">
+        <a href="{{ url_for('ditu') }}">地域分布</a>
+        <a href="{{ url_for('sex') }}">性别对比</a>
+        <a href="{{ url_for('shengfen') }}">省份人数</a>
+        <a href="{{ url_for('ciyun') }}">签名词云</a>
+        <a href="{{ url_for('headimg') }}">头像拼图</a><br />
+    </div>
+
+    你共有{{ number_of_friends }}个好友,其中有{{ Sex_count1 }}个男生，{{ Sex_count2 }}个女生，{{ Sex_count0 }}个未显示性别。<br />
+    你的朋友主要来自省份：{{ Province_count_index0 }}({{ Province_count0 }})、{{ Province_count_index1 }}({{ Province_count1 }})和{{ Province_count_index2 }}({{ Province_count2 }})。<br />
+    主要来自这些城市：{{ City_count_index0 }}({{ City_count0 }})、{{ City_count_index1 }}({{ City_count1 }})、{{ City_count_index2 }}({{ City_count2 }})、{{ City_count_index3 }}({{ City_count3 }})、{{ City_count_index4 }}({{ City_count4 }})和{{ City_count_index5 }}({{ City_count5 }})<br /><br />
+
+    <div style="width: 85%; margin: 0 auto;">
+        <table border="1" cellspacing="0" cellpadding="0" class="table table-hover">
+            <tr style="font-weight: bold; font-size: 16px; text-align: center;">
+                <td>微信昵称</td>
+                <td>备注</td>
+                <td>所在地区</td>
+                <td width="50px">性别</td>
+                <td>个性签名</td>
+                <td>情感分析</td>
+            </tr>
+            {% for item in friendList %}
+            <tr style="text-align: center;">
+                <td>{{ item['昵称'] }}</td>
+                <td>{{ item['备注'] }}</td>
+                <td>{{ item['省份'] }}-{{ item['城市'] }}</td>
+                <td>{{ item['性别'] }}</td>
+                <td>{{ item['个性签名'] }}</td>
+                <td>{{ item['情感分析'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br><br>
+    </div>
+    
+</body>
+</html>
